@@ -12,7 +12,7 @@ class TestSet_Users(object):
     url = "https://gorest.co.in/public-api/users"
 
     def setup_method(self):
-        settingsFile = open("C:/Users/Babukumar V/PycharmProjects/RESTAPI1/TestCases/Test_Settings.yaml", "r")
+        settingsFile = open("Test_Settings.yaml", "r")
         setting = yaml.safe_load(settingsFile)
         self.acc_token = setting["api_key"]
 
@@ -33,7 +33,7 @@ class TestSet_Users(object):
 
     def test_Create(self):
 
-        payload = {"name": "firstuser1","email": "Firstuser1@testonly.com","gender": "Male","status": "Active"}
+        payload = {"name": "firstuser3","email": "Firstuser3@testonly.com","gender": "Male","status": "Active"}
         headers = {
                 'Authorization': 'Bearer ' + self.acc_token,
                 'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ class TestSet_Users(object):
         print(response.text.encode('utf8'))
 
     # Test-2
-    @pytest.mark.parametrize("name", ["firstuser1", "firstuser", "Oscar"])
+    @pytest.mark.parametrize("name", ["firstuser2", "firstuser", "Oscar"])
     def test_get_a_user(self, name):
         payload = {"name": name}
         headers = {
@@ -61,4 +61,4 @@ class TestSet_Users(object):
         print(response.text.encode('utf8'))
 
         check = self.__find_string_in_response(response, name)
-        assert check == True
+        assert check == True, "GEt API Test failed"
