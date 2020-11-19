@@ -29,15 +29,16 @@ class TestSet_Users(object):
                 return check
             else:
                 for i in range(0,length_responseJSON,1):
-                    check =  searchFor in responseJSON["data"][i]["name"]
+                    check =  searchFor in responseJSON["data"][i]["email"]
                     print('The value is ',length_responseJSON,searchFor,i)
                     if check == False:
+                        print("i am inside the if email does not match with the name")
                         return check
             return check
 
     def test_Create(self):
 
-        payload = {"name": "revathi","email": "Firstuser1232@testonly.com","gender": "Male","status": "Active"}
+        payload = {"name": "forcheck","email": "forcheck@testonly.com","gender": "Male","status": "Active"}
         headers = {
                 'Authorization': 'Bearer ' + self.acc_token,
                 'Content-Type': 'application/json'
@@ -52,7 +53,7 @@ class TestSet_Users(object):
         print(response.text.encode('utf8'))
 
     # Test-2
-    @pytest.mark.parametrize("name", ["zzfirstuser3", "firstuser1", "revathi"])
+    @pytest.mark.parametrize("name", ["zzfirstuser3", "forcheck", "revathi"])
     def test_get_a_user(self, name):
         payload = {"name": name}
         headers = {
