@@ -18,22 +18,22 @@ class TestSet_Users(object):
         print(self.acc_token)
 
     def __find_string_in_response(self, fullResponse, searchFor):
-        check = True
+        check = False
         rawResponse = fullResponse
         if "data" not in rawResponse.text:
-            check = False
+            return check
         else:
             responseJSON = rawResponse.json()
             length_responseJSON = len(responseJSON["data"])
             if length_responseJSON == 0:
-                check = False
+                return check
+            else:
                 for i in range(0,length_responseJSON,1):
                     check =  searchFor in responseJSON["data"][i]["name"]
                     print('The value is ',length_responseJSON,searchFor,i)
                     if check == False:
                         return check
             return check
-        return check
 
     def test_Create(self):
 
@@ -47,7 +47,7 @@ class TestSet_Users(object):
 
         print('Test is executing')
         print(response.status_code)
-        
+
 
         print(response.text.encode('utf8'))
 
